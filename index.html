@@ -1205,9 +1205,19 @@ const API_BASE = (location.hostname === 'localhost' || location.hostname === '12
 
         //Funcion submit Order
 
+async function submitOrder() {
+  const name = document.getElementById("customerName").value.trim();
+  const phone = document.getElementById("phoneNumber").value.trim();
+  const time = document.getElementById("deliveryTime").value.trim();
+  const weight = document.getElementById("weight").value.trim();
+  const isPaid = document.getElementById("isPaid").checked;
+  const bagType = document.getElementById("bagType").value;
 
+  if (!name || !phone || !time || !weight || !bagType) {
+    alert("Por favor completa todos los campos, incluyendo tipo de bolsa");
+    return;
+  }
 
- async function submitOrder() {
   const newOrderPayload = {
     coffeeType: orderData.coffeeType,
     grindType: orderData.grindType,
@@ -1215,8 +1225,8 @@ const API_BASE = (location.hostname === 'localhost' || location.hostname === '12
     phoneNumber: phone,
     deliveryTime: time,
     weight: weight,
-    isPaid: isPaid,
-    bagType: bagType
+    bagType: bagType,
+    isPaid: isPaid
   };
 
   try {
@@ -1225,37 +1235,22 @@ const API_BASE = (location.hostname === 'localhost' || location.hostname === '12
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newOrderPayload)
     });
-    const data = await res.json();
-    console.log("Pedido guardado:", data);
-  } catch (err) {
-    console.error("Error al guardar el pedido:", err);
-  }
-}
 
+    if (!res.ok) throw new Error("Respuesta no OK del servidor");
 
-    if (!res.ok) throw new Error('Respuesta no OK del servidor');
-
-    const createdOrder = await res.json();
+    const createdOrder = await res.json();   // 👈 aquí el await ya está dentro del async
     lastOrderData = createdOrder;
 
-//tipo de bolsa 
-
-const bagType = document.getElementById('bagType').value;
-if (!bagType) {
-  alert("Selecciona el tipo de bolsa");
-  return;
-}
-
-
-    // Actualizamos la vista de resumen usando el pedido que nos devolvió el servidor
+    // Actualizamos la vista de resumen
     displayOrderSummary(createdOrder);
     showScreen(4);
 
   } catch (err) {
     console.error(err);
-    alert('Error al guardar el pedido: ' + (err.message || err));
+    alert("Error al guardar el pedido: " + (err.message || err));
   }
 }
+
 
     //DisplayOrderSummary
 
@@ -1717,5 +1712,6 @@ async function exportToGoogleDocs() {
 </body>
 
 </html>
+
 
 
