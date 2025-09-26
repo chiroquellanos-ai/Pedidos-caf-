@@ -1250,18 +1250,7 @@ if (!bagType) {
   return;
 }
 
-const newOrderPayload = {
-  coffeeType: orderData.coffeeType,
-  grindType: orderData.grindType,
-  customerName: name,
-  phoneNumber: phone,
-  deliveryTime: time,
-  weight: weight,
-  bagType: bagType,   // 👈 nuevo campo
-  isPaid: isPaid
-};
 
-    
     // Actualizamos la vista de resumen usando el pedido que nos devolvió el servidor
     displayOrderSummary(createdOrder);
     showScreen(4);
@@ -1730,4 +1719,5 @@ async function exportToGoogleDocs() {
 </script>
 
 </body>
+
 </html>
