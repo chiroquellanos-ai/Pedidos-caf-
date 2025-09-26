@@ -1206,18 +1206,6 @@ const API_BASE = (location.hostname === 'localhost' || location.hostname === '12
         //Funcion submit Order
 
 
-        async function submitOrder() {
-  const name = document.getElementById('customerName').value.trim();
-  const phone = document.getElementById('phoneNumber').value.trim();
-  const time = document.getElementById('deliveryTime').value.trim();
-  const weight = document.getElementById('weight').value.trim();
-  const isPaid = document.getElementById('isPaid').checked;
-  const bagType = document.getElementById('bagType').value;
-
-  if (!name || !phone || !time || !weight) {
-    alert("Completa todos los campos");
-    return;
-  }
 
  async function submitOrder() {
   const newOrderPayload = {
@@ -1729,4 +1717,5 @@ async function exportToGoogleDocs() {
 </body>
 
 </html>
+
 
