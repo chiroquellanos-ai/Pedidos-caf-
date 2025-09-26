@@ -1219,6 +1219,7 @@ const API_BASE = (location.hostname === 'localhost' || location.hostname === '12
     return;
   }
 
+ async function submitOrder() {
   const newOrderPayload = {
     coffeeType: orderData.coffeeType,
     grindType: orderData.grindType,
@@ -1236,6 +1237,13 @@ const API_BASE = (location.hostname === 'localhost' || location.hostname === '12
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newOrderPayload)
     });
+    const data = await res.json();
+    console.log("Pedido guardado:", data);
+  } catch (err) {
+    console.error("Error al guardar el pedido:", err);
+  }
+}
+
 
     if (!res.ok) throw new Error('Respuesta no OK del servidor');
 
@@ -1721,3 +1729,4 @@ async function exportToGoogleDocs() {
 </body>
 
 </html>
+
