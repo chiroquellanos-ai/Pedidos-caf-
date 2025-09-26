@@ -1,4 +1,4 @@
-const CACHE_NAME = 'pedidos-cafe-v1';
+const CACHE_NAME = 'pedidos-cafe-v5';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -40,3 +40,4 @@ self.addEventListener('fetch', event => {
     })
   );
 });
+
